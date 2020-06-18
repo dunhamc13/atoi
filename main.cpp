@@ -25,14 +25,15 @@ int myAtoi(string str) {
 
     //then check optional + / -
     if (str[i] == '-' || str[i] == '+'){
-        sign = 1 - 2 * (str[i++] == '-'); 
+        sign = 1 - 2 * (str[i] == '-'); 
         ++i;
     }//end check for optional + /-
 
     //while 0 - 9
     while (str[i] >= '0' && str[i] <= '9') {
         //if MAX OR MIN
-        if (base > INT_MAX) {
+        if (base > INT_MAX / 10 
+        || (base == INT_MAX / 10  && str[i] - '0' > 7)) {
             if (sign == 1){
                  return INT_MAX;     
             }
@@ -42,7 +43,7 @@ int myAtoi(string str) {
         base = 10 * base + (str[i++] - '0');
     }
         return base * sign;
-}//end my atoi
+}
 
 
 /* main driver
